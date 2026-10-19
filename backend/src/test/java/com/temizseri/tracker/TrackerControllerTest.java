@@ -106,4 +106,48 @@ class TrackerControllerTest {
                         .contentType(MediaType.APPLICATION_JSON).content("{\"done\":true}"))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    void rangeAndDayDetail() throws Exception {
+        complete(TODAY.minusDays(2), 4);
+        complete(TODAY.minusDays(1), 1);
+
+        mvc.perform(get("/api/days").param("from", TODAY.minusDays(2).toString()).param("to", TODAY.toString()))
+                .andExpect(jsonPath("$.length()").value(3))
+                .andExpect(jsonPath("$[0].done").value(4))
+                .andExpect(jsonPath("$[1].done").value(1))
+                .andExpect(jsonPath("$[2].done").value(0));
+
+        mvc.perform(get("/api/days/" + TODAY.minusDays(1)))
+                .andExpect(jsonPath("$.habits[0].done").value(true))
+                .andExpect(jsonPath("$.habits[1].done").value(false));
+    }
+
+    @Test
+    void editingPastDayRepairsStreak() throws Exception {
+        complete(TODAY.minusDays(1), 4);
+        complete(TODAY.minusDays(2), 3);
+        complete(TODAY.minusDays(3), 4);
+
+        mvc.perform(put("/api/days/" + TODAY.minusDays(2) + "/habits/" + all.get(3).getId())
+                        .param("today", TODAY.toString())
+                        .contentType(MediaType.APPLICATION_JSON).content("{\"done\":true}"))
+                .andExpect(jsonPath("$.streak").value(3));
+    }
+
+    @Test
+    void statsCountBestStreakAndMonthRate() throws Exception {
+        // 1-3 Ekim tam (3 günlük seri), 5 Ekim tam, 18-19 Ekim tam
+        for (int d : new int[] {1, 2, 3, 5, 18, 19}) {
+            complete(LocalDate.of(2026, 10, d), 4);
+        }
+        complete(LocalDate.of(2026, 9, 30), 4); // önceki ay: en iyi seriye girer, aylık orana girmez
+
+        mvc.perform(get("/api/stats").param("today", TODAY.toString()))
+                .andExpect(jsonPath("$.bestStreak").value(4))
+                .andExpect(jsonPath("$.currentStreak").value(2))
+                .andExpect(jsonPath("$.cleanDays").value(7))
+                .andExpect(jsonPath("$.monthRate").value(24.0 / 76))
+                .andExpect(jsonPath("$.firstDay").value("2026-09-30"));
+    }
 }

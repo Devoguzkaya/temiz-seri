@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.time.Clock;
 import java.time.LocalDate;
+import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +30,23 @@ public class TrackerController {
     @GetMapping("/summary")
     public Summary summary(@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate today) {
         return tracker.summary(resolve(today));
+    }
+
+    /** Takvim için gün gün kaç alışkanlık yapıldığı. */
+    @GetMapping("/days")
+    public List<Summary.DayScore> range(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+                                        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
+        return tracker.range(from, to);
+    }
+
+    @GetMapping("/days/{day}")
+    public Summary.DayDetail day(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate day) {
+        return tracker.day(day);
+    }
+
+    @GetMapping("/stats")
+    public Summary.Stats stats(@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate today) {
+        return tracker.stats(resolve(today));
     }
 
     @PutMapping("/days/{day}/habits/{habitId}")
