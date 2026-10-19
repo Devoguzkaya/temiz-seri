@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "Temiz Seri",
+    "slug": "temiz-seri",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.temizseri.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#2F5D3A",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.temizseri.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      "expo-font",
+      [
+        "expo-notifications",
+        {
+          "color": "#2F5D3A"
+        }
+      ]
+    ],
+    "scheme": "temizseri"
+  }
+}

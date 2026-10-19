@@ -24,4 +24,18 @@ public interface HabitCheckRepository extends JpaRepository<HabitCheck, Long> {
             """)
     List<LocalDate> findCompleteDaysBefore(@Param("before") LocalDate before,
                                            @Param("habitCount") long habitCount);
+
+    /** Tüm alışkanlıkların yapıldığı günler (eskiden yeniye). */
+    @Query("""
+            select c.day from HabitCheck c
+            where c.day <= :until
+            group by c.day
+            having count(c) >= :habitCount
+            order by c.day asc
+            """)
+    List<LocalDate> findCompleteDaysUntil(@Param("until") LocalDate until,
+                                          @Param("habitCount") long habitCount);
+
+    @Query("select min(c.day) from HabitCheck c")
+    LocalDate findFirstDay();
 }

@@ -16,4 +16,15 @@ public record Summary(
 
     public record DayScore(LocalDate date, int done, int total) {
     }
+
+    /** Takvimden açılan tek bir günün alışkanlıkları. */
+    public record DayDetail(LocalDate date, List<HabitStatus> habits) {
+    }
+
+    /**
+     * monthRate: bu ay bugüne kadar yapılan işaret / yapılabilecek işaret (0-1).
+     * firstDay: ilk kaydın tarihi, hiç kayıt yoksa null.
+     */
+    public record Stats(int currentStreak, int bestStreak, int cleanDays, double monthRate, LocalDate firstDay) {
+    }
 }
