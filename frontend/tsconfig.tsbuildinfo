@@ -1,1 +1,0 @@
-{"root":["./src/App.tsx","./src/main.tsx","./src/components/HabitList.tsx","./src/components/TodayCard.tsx","./src/components/WeekChart.tsx","./src/lib/api.ts","./src/lib/useSummary.ts","./vite.config.ts"],"version":"5.8.3"}
