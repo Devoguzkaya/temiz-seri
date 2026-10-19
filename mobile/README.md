@@ -1,6 +1,6 @@
 # Temiz Seri · Mobil
 
-Expo (React Native + TypeScript) uygulaması. Veriler `../backend` içindeki Spring Boot API'sinde tutulur.
+Expo SDK 57 (React Native + TypeScript) uygulaması. SDK, App Store/Play Store'daki Expo Go'nun desteklediği sürümde tutulmalı; Expo Go yeni SDK'ya geçmeden yükseltme. Veriler `../backend` içindeki Spring Boot API'sinde tutulur.
 
 ## Ekranlar
 
