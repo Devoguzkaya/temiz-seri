@@ -1,0 +1,27 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: temiz-seri
+  datasource:
+    # Dosya tabanlı H2: veriler backend/data altında kalıcı tutulur.
+    # PostgreSQL'e geçmek için url/username/password ve sürücüyü değiştirmek yeterli.
+    url: jdbc:h2:file:./data/temizseri;AUTO_SERVER=TRUE
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+app:
+  # İstemci tarih göndermezse "bugün" bu saat dilimine göre hesaplanır.
+  zone: Europe/Istanbul
+  cors-origins: http://localhost:5173

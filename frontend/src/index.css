@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* Renkler CSS değişkeni olarak tanımlı; koyu mod sistem tercihine göre değişir. */
+:root {
+  --bg: #f6f1e4;
+  --card: #fffdf6;
+  --line: #e4dcc8;
+  --fg: #22281f;
+  --muted: #6b6f60;
+  --accent: #2f5d3a;
+  --accent-soft: #e2ebdc;
+  --on-accent: #fdfbf3;
+  --gold: #b7791f;
+  --gold-soft: #f6e6c3;
+  --empty: #e9e2cf;
+  --danger: #a33a2b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161a15;
+    --card: #1f241e;
+    --line: #313a2f;
+    --fg: #ece8da;
+    --muted: #a2a593;
+    --accent: #7fbf8a;
+    --accent-soft: #263a2a;
+    --on-accent: #10180f;
+    --gold: #e3a94a;
+    --gold-soft: #3a2f1a;
+    --empty: #2c3329;
+    --danger: #e58a7a;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-empty: var(--empty);
+  --color-danger: var(--danger);
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-bg text-fg font-sans antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
