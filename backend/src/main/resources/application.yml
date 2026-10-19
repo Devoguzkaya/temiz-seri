@@ -24,4 +24,5 @@ spring:
 app:
   # İstemci tarih göndermezse "bugün" bu saat dilimine göre hesaplanır.
   zone: Europe/Istanbul
-  cors-origins: http://localhost:5173
+  # Web arayüzü (Vite) ve Expo web önizlemesi
+  cors-origins: http://localhost:5173,http://localhost:8081
